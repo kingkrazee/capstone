@@ -1,4 +1,4 @@
-import { getUsersDb, getUserDb, insertUsersDb, deleteUserDb, updateUsersDb } from '../model/usersDb.js'
+import { getUsersDb, getUserDb, insertUsersDb, deleteUserDb, updateUsersDb, insertBookingDb } from '../model/usersDb.js'
 import { hash } from 'bcrypt'
 
 const getUsers = async(req,res) =>{
@@ -40,4 +40,25 @@ const updateUser = async(req,res) =>{
 const loginUser = async(req,res)=>{
     res.status(200).send({message:"You have logged in successfully"})
 }
-export { getUsers, getUser, insertUsers, deleteUser, updateUser, loginUser }
+const insertBooking = async (req,res) =>{
+    const { usersID } = req.params;
+    const {equipmentID} = req.params;
+
+    try {
+        if (!usersID || !equipmentID) {
+            throw new Error('Invalid booking data');
+        }
+
+        const booking = await insertBookingDb(usersID,equipmentID);
+        if (!booking) {
+            throw new Error('Failed to create booking');
+        }
+
+        return res.json({message: 'Booking created successfully', booking})
+    }   catch (error){
+        console.error('Error creating booking', error);
+        const errorMessage = error.message || 'Error creating booking';
+        return res.status(500).json({message: errorMessage})
+    }
+}
+export { getUsers, getUser, insertUsers, deleteUser, updateUser, loginUser, insertBooking }
