@@ -24,7 +24,7 @@
             <p>Amount: R{{ equipment.amount }}</p>
           </div>
           <div class="button-container">
-            <button class="purchase-btn">Hire</button>
+            <button @click="$router.push(`/Checkout`)" class="purchase-btn">Hire</button>
             <button @click="$router.push(`/equipment/${equipment.equipmentID}`)" class="view-more-btn">View More</button>
           </div>
         </template>
@@ -121,6 +121,7 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 1rem;
+    background-color: #ddd
 }
   .button-container{
     display: flex;
@@ -137,6 +138,9 @@
     cursor: pointer;
     width: 100%;
     margin-top: 8px;
+  }
+  .content button{
+    pointer-events: auto;
   }
   @media (max-width: 780px) {
   .controls {

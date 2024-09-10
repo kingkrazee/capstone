@@ -87,5 +87,6 @@
   .card:hover .img-content img {
     fill: transparent;
   }
+
   </style>
   

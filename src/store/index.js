@@ -14,6 +14,10 @@ export default createStore({
     users: [],
     equipment: null,
     user: null,
+    usersID: null,
+    bookings:[],
+    token: null,
+    bookedEquipment: null,
   },
   getters: {
   },
@@ -30,6 +34,12 @@ export default createStore({
     setUser(state, payload) {
       state.user = payload;
     },
+    setUsersID(state, payload){
+      state.usersID = payload;
+    },
+    setToken(state,payload){
+      state.token = payload;
+    }
   },
   actions: {
     async getAllEquipment({commit}){
@@ -155,6 +165,46 @@ export default createStore({
         toast("Logged In Successfully", {
           "theme": "dark",
           "type": "default",
+          "position": "top-center",
+          "dangerouslyHTMLString": true
+        });
+      }
+    },
+    async getUser({ commit },id) {
+      try {
+        const { data } = await axios.get(`${apiURL}users/${id}`)
+        console.log(data);
+        commit('setUser', data)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    //bookings
+    async insertBookingDb({ commit, state}, payload){
+      const {equipmentID,bookingDate,usersID} = payload;
+      console.log(`insertBookingDb bookingDate:`, bookingDate);
+      try{
+        const token = state.token;
+        const usersID = state.usersID || cookies.get('usersID');
+        console.log('Inserting booking with:',{ equipmentID, usersID, bookingDate});
+        const response = await axios.post(`https://capstone-1-u51y.onrender.com/users/${usersID}/booking`,{
+          equipmentID: equipmentID,
+          date: bookingDate,
+        });
+        if (response.data.message) {
+          toast("Order saved successfully!", {
+            "theme": "auto",
+            "type": "default",
+            "position": "top-center",
+            "dangerouslyHTMLString": true
+          });
+          // location.reload();
+        }
+      } catch (error) {
+        console.error(error);
+        toast("Error saving order. Please try again.", {
+          "theme": "auto",
+          "type": "error",
           "position": "top-center",
           "dangerouslyHTMLString": true
         });

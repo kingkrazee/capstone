@@ -24,7 +24,7 @@
             <p>Amount: R{{ equipment.amount }}</p>
           </div>
           <div class="button-container">
-            <button class="purchase-btn">Hire</button>
+            <button @click="hire(equipment.equipmentID)" class="purchase-btn">Hire</button>
             <button @click="$router.push(`/equipment/${equipment.equipmentID}`)" class="view-more-btn">View More</button>
           </div>
         </template>
@@ -71,8 +71,29 @@ export default {
         },
         AllEquipment() {
             return this.$store.state.allEquipment;
+        },
+        bookNow(productId) {
+        const existingProduct = this.$store.state.bookedProducts.find(product => product.prodID === productId);
+        if (existingProduct) {
+            // Increment the quantity of the existing product
+            this.$store.commit('updateBookedProductQuantity', { prodID: productId, quantity: existingProduct.quantity + 1 });
+        } else {
+            // Add the new product to the checkout
+            this.$store.dispatch('getProduct', productId).then(product => {
+                  console.log('Adding product to booked products:', product);
+                  this.$store.commit('setBookedProduct', product);
+            });
         }
-    },
+        // Check if the user is logged in
+        if (this.$cookies.get('token')) {
+            // Navigate to the checkout page with the productId as a parameter
+            this.$router.push({ name: 'checkout', params: { prodID: productId } });
+        } else {
+            // Navigate to the login page
+            this.$router.push({ name: 'login' });
+        }
+        },
+          },
     mounted() {
         this.getAllEquipment();
     }
@@ -145,6 +166,10 @@ export default {
     width: 100%;
     margin-top: 8px;
 }
+.content button{
+    pointer-events: auto;
+  }
+
 @media (max-width: 780px) {
   .controls {
     align-items: center;

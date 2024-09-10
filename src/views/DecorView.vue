@@ -19,7 +19,7 @@
           <div class="carousel-caption d-none d-md-block">
             <h5>{{ equipment.equipName }}</h5>
             <p>Amount: R{{ equipment.amount }}</p>
-            <button class="purchase-btn">Hire</button>
+            <button @click="$router.push(`/Checkout`)" class="purchase-btn">Hire</button>
             <button @click="$router.push(`/equipment/${equipment.equipmentID}`)" class="view-more-btn">View More</button>
           </div>
         </div>
@@ -123,6 +123,7 @@ export default {
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 1rem;
+    background-color: #ddd
 }
 .button-container{
   display: flex;
@@ -140,6 +141,9 @@ export default {
   width: 100%;
   margin-top: 8px;
 }
+.content button{
+    pointer-events: auto;
+  }
 @media (max-width: 780px) {
   .thecarousel {
     width: 100%;

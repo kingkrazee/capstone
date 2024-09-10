@@ -44,6 +44,9 @@
               <a class="nav-link text-white" data-bs-toggle="modal" data-bs-target="#authModal"><i class="bi bi-person-circle"></i></a>
             </li>
             <li class="nav-item">
+              <router-link to="/Checkout" class="nav-link text-white"><i class="bi bi-cart4"></i></router-link>
+            </li>
+            <li class="nav-item">
               <router-link to="/Admin" class="nav-link text-white"><i class="bi bi-gear"></i></router-link>
             </li>
           </ul>
@@ -127,7 +130,7 @@
                       <i :class="showRepeatPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
                     </button>
                   </div>
-                  <input @click.prevent="insertUser()" type="submit" class="button" value="Sign Up" />
+                  <input @click.prevent="insertUsers()" type="submit" class="button" value="Sign Up" />
                 </form>
                 <div class="help-text">
                   <p>By signing up, you agree to our</p>
@@ -359,5 +362,9 @@ button {
 }
 #terms{
   color: #000000;
+}
+.logo{
+  width: 50px;
+  height: 50px;
 }
 </style>
