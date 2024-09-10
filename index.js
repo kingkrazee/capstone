@@ -12,7 +12,8 @@ app.use(express.json())
 app.use(cors({
     // http://localhost:8080
     origin: ['http://localhost:8080'], 
-    credentials:true
+    credentials:true,
+    headers: ['Content-type', 'Authorization']
 }))
 
 app.use(express.static('public'))
