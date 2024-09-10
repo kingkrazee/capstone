@@ -9,12 +9,14 @@
           <div class="col-xs-6 col-md-3">
             <h6>Categories</h6>
             <ul class="footer-links">
-              <li><a href="#">Headsets</a></li>
-              <li><a href="#">Controllers</a></li>
-              <li><a href="#">PS5</a></li>
-              <li><a href="#">Accessories</a></li>
-              <li><a href="#">Cleaning Equipment</a></li>
-              <li><a href="#">Gift Cards</a></li>
+              <li><a href="#">Furniture</a></li>
+              <li><a href="#">Crockery</a></li>
+              <li><a href="#">Linen</a></li>
+              <li><a href="#">Servign Dishes</a></li>
+              <li><a href="#">Cutlery</a></li>
+              <li><a href="#">Kitchenware</a></li>
+              <li><a href="#">Glasses</a></li>
+              <li><a href="#">Extras</a></li>
             </ul>
           </div>
           <div class="col-xs-6 col-md-3">

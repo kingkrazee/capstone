@@ -2,13 +2,7 @@
     <div class="heading"><h1>Get In Touch</h1></div>
     <div class="row  justify-content-center">
         <div class="col-md-5">
-            <h3>Contact Details</h3>
-            <div class="map">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3309.8492373930594!2d18.55492507544142!3d-33.94500552300943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc5b3b3062955f%3A0x124b7ea060fc1234!2s7%20Kersboom%20St%2C%20Bonteheuwel%2C%20Cape%20Town%2C%207764!5e0!3m2!1sen!2sza!4v1725004240260!5m2!1sen!2sza" width="750" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-        </div>
-        <div class="col-md-7">
-            <h3>Online Inquiry</h3>
+          <h3>Online Inquiry</h3>
             <div class="contact">
                 <div class="formcarry-container">
                            <form ref="form" action="https://formcarry.com/s/iwwxEiwV8Lx" method="POST" enctype="multipart/form-data" @submit.prevent="handleSubmit">
@@ -34,6 +28,15 @@
                            </form>
                 </div>
             </div>
+          </div>
+          <div class="col-md-7">
+          <h3>Contact Details</h3>
+          <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3309.8492373930594!2d18.55492507544142!3d-33.94500552300943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc5b3b3062955f%3A0x124b7ea060fc1234!2s7%20Kersboom%20St%2C%20Bonteheuwel%2C%20Cape%20Town%2C%207764!5e0!3m2!1sen!2sza!4v1725004240260!5m2!1sen!2sza" width="750" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <p>Email: nataliegailwilliams@gmail.com</p>
+            <p>Phone: +27 81 517 2881</p>
+          </div>
+          
         </div>
     </div>
     
@@ -256,6 +259,7 @@ export default {
         border-color: hsl(var(--fc-error-hsl));
         box-shadow: 0px 0px 0px 3px hsla(var(--fc-error-hsl), 12%);
       }
+      
       .row{
         color: black;
       }
@@ -264,7 +268,7 @@ export default {
         margin-bottom: 2rem;
       }
       .map{
-        margin-top: 13rem;
+        margin-top: 3rem;
         margin-bottom: 2rem;
         margin-left: 3rem;
       }
@@ -281,23 +285,51 @@ export default {
         justify-content: center;
         font-family: "Baskervville SC", serif;
       }
-      @media only screen and (max-width: 780px){
-        .formcarry-container{
-            height: 200px;
-            width: 200px;
-        }
-        iframe{
-            height: 200px;
-            width: 200px;
-        }
-        .contact{
-            margin-top: -2rem;
-        }
-        .row{
-            margin-bottom: 2rem;
-        }
-        /* .map{
-            margin-top: -1rem;
-        } */
+      .col-md-7{
+        border: none;
+      }
+      @media only screen and (max-width: 780px) {
+  .row {
+    display: flex;
+    flex-direction: column;
+  }
+  .col-md-7 {
+    order: 2;
+  }
+  .col-md-5 {
+    order: 1;
+  }
+  .map {
+    margin-top: 1rem;
+    margin-right: 3rem;
+    margin-bottom: 1rem;
+  }
+  .map iframe {
+    width: 100%;
+    height: 200px;
+  }
+  .contact {
+    margin-top: 0;
+  }
+  .formcarry-container {
+    width: 100%;
+    padding: 1rem;
+  }
+  .formcarry-block {
+    margin-top: 1rem;
+  }
+  .formcarry-container input, 
+  .formcarry-container textarea, 
+  .formcarry-container select {
+    height: 36px;
+    font-size: 12px;
+  }
+  .formcarry-container textarea {
+    min-height: 100px;
+  }
+  .formcarry-container button {
+    height: 36px;
+    font-size: 12px;
+  }
 }
 </style>

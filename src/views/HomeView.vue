@@ -16,7 +16,7 @@
         <div class="info"><h3 class="collection">Decor</h3></div>
         <div class="button" id="look">
           <div id="spin"></div>
-          <a href="./ThemesView.vue">Take A Look</a>
+          <a href="/Themes">Take A Look</a>
         </div>
       </div>
       <div class="card">
@@ -24,7 +24,7 @@
         <div class="info"><h3 class="collection">Cutlery</h3></div>
         <div class="button" id="look">
           <div id="spin"></div>
-          <a href="./CateringView.vue">Take A Look</a>
+          <a href="/Catering">Take A Look</a>
         </div>
       </div>
       <div class="card">
@@ -32,7 +32,7 @@
         <div class="info"><h3 class="collection">Furniture</h3></div>
         <div class="button" id="look">
           <div id="spin"></div>
-          <a href="./HiringView.vue">Take A Look</a>
+          <a href="/Hiring">Take A Look</a>
         </div>
       </div>
     </div>
@@ -236,7 +236,7 @@ button:hover{
     font-size: large;
   }
   .homeimg{
-    width: 400px;
+    width: 100%;
     height: 300px;
   }
   .homeImg{

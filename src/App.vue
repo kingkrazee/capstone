@@ -1,8 +1,9 @@
 <template>
   <div>
-    <div class="content-wrapper">
+    <SpinnerComp v-if="showSpinner"/>
+    <div class="content-wrapper" v-else>
       <NavbarComp />
-      <router-view />
+      <router-view/>
       <FooterComp />
     </div>
     <div class="area">
@@ -29,11 +30,22 @@
 <script>
 import NavbarComp from './components/NavbarComp.vue';
 import FooterComp from './components/FooterComp.vue';
-
+import SpinnerComp from './components/SpinnerComp.vue';
 export default {
   components: {
     NavbarComp,
     FooterComp,
+    SpinnerComp,
+  },
+  data() {
+    return {
+      showSpinner: true
+    }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.showSpinner = false
+    }, 3000)
   },
 };
 </script>
@@ -52,8 +64,6 @@ body {
   overflow-x: hidden;
   width: 100%;
 }
-
-/* Content Wrapper */
 .content-wrapper {
   position: relative;
   /* z-index: 1; */

@@ -12,9 +12,9 @@ const routes = [
    component: () => import('../views/AboutView.vue')
   },
   {
-   path: '/Themes',
-   name: 'Themes',
-   component: () => import('../views/ThemesView.vue')
+   path: '/Decor',
+   name: 'Decor',
+   component: () => import('../views/DecorView.vue')
   },
   {
    path: '/Catering',
@@ -36,9 +36,12 @@ const routes = [
    name: 'Admin',
    component: () => import('../views/AdminView.vue')
   },
+  {
+    path: '/equipment/:id',
+    name: 'Single View',
+    component: () => import('../views/singleView.vue')
+  }
   
-  
-
 ]
 
 const router = createRouter({
