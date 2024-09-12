@@ -10,11 +10,11 @@ const getUser = async(req,res) =>{
 const insertUsers = async(req,res) =>{
     let {cookie} = req.headers
     console.log(cookie);
-    let {firstName,lastName,usersAge,gender,usersRole,emailAdd,usersPass,usersProfile} =req.body
+    let {firstName,lastName,usersAge,gender,emailAdd,usersPass,usersProfile} =req.body
     hash(usersPass, 10, async (err,hashedP)=>{
         if(err) throw err
         console.log(hashedP);
-        await insertUsersDb(firstName,lastName,usersAge,gender,usersRole,emailAdd,hashedP,usersProfile)
+        await insertUsersDb(firstName,lastName,usersAge,gender,emailAdd,hashedP,usersProfile)
         res.status(200).send('User added successfully')
     })
 }
