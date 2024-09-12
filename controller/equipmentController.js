@@ -3,6 +3,7 @@ import { getAllEquipmentDb, getEquipmentDb, insertEquipmentDb, deleteEquipmentDb
 const getAllEquipment = async(req,res)=>{
     let data = await getAllEquipmentDb()
     let id = req.body.id
+    console.log(id)
     res.json({data:data, user_id:id})
 }
 const getEquipment = async(req,res)=>{
