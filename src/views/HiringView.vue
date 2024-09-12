@@ -72,22 +72,22 @@ export default {
         AllEquipment() {
             return this.$store.state.allEquipment;
         },
-        bookNow(productId) {
-        const existingProduct = this.$store.state.bookedProducts.find(product => product.prodID === productId);
-        if (existingProduct) {
+        book(equipmentID) {
+        const existingEquipment = this.$store.state.bookedEquipment.find(equipment => equipment.equipmentID === equipmentId);
+        if (existingEquipment) {
             // Increment the quantity of the existing product
-            this.$store.commit('updateBookedProductQuantity', { prodID: productId, quantity: existingProduct.quantity + 1 });
+            this.$store.commit('updateBookedEquipmentQuantity', { equipmentID: equipmentID, quantity: existingEquipment.quantity + 1 });
         } else {
             // Add the new product to the checkout
-            this.$store.dispatch('getProduct', productId).then(product => {
-                  console.log('Adding product to booked products:', product);
-                  this.$store.commit('setBookedProduct', product);
+            this.$store.dispatch('getEquipment', equipmentID).then(equipment => {
+                  console.log('Adding product to booked equipment:', equipment);
+                  this.$store.commit('setBookedEquipment', equipment);
             });
         }
         // Check if the user is logged in
         if (this.$cookies.get('token')) {
             // Navigate to the checkout page with the productId as a parameter
-            this.$router.push({ name: 'checkout', params: { prodID: productId } });
+            this.$router.push({ name: 'checkout', params: { equipmentID: equipmentID } });
         } else {
             // Navigate to the login page
             this.$router.push({ name: 'login' });

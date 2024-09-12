@@ -3,7 +3,9 @@
     <SpinnerComp v-if="showSpinner"/>
     <div class="content-wrapper" v-else>
       <NavbarComp />
-      <router-view/>
+      <main>
+        <router-view/>
+      </main>
       <FooterComp />
     </div>
     <div class="area">
@@ -68,7 +70,9 @@ body {
   position: relative;
   /* z-index: 1; */
 }
-
+main {
+  flex: 1; /* Take up the remaining space above the footer */
+}
 /* Animation Styles */
 .area {
   position: fixed;

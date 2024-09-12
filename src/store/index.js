@@ -2,7 +2,7 @@ import { createStore } from 'vuex'
 import axios from 'axios';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
-import { useCookies } from 'vue-cookies'
+import { useCookies } from 'vue-cookies';
 
 const apiURL = 'https://capstone-1-u51y.onrender.com/';
 axios.defaults.withCredentials= true
@@ -48,6 +48,15 @@ export default createStore({
         commit('setAllEquipment', data);
       }catch (error){
         console.log('error fetching equipment:',error);
+      }
+    },
+    async getEquipment({ commit }, id) {
+      try {
+        const { data } = await axios.get(`${apiURL}equipment/${id}`);
+        console.log(data);
+        commit('setEquipment', data[0]);
+      } catch (error) {
+        console.error('Error fetching equipment:', error);
       }
     },
     async insertEquipment({ commit }, equipment) {
@@ -157,14 +166,24 @@ export default createStore({
       }
     },
     async loginUser({ commit }, info) {
-      console.log(info);
-      let { data } = await axios.post(`${apiURL}users/login`, info);
-      console.log(data);
-      $cookies.set('token', data.token);
-      if (data.message) {
-        toast("Logged In Successfully", {
-          "theme": "dark",
-          "type": "default",
+      try {
+        const { data } = await axios.post(`${apiURL}users/login`, info);
+        console.log(data);
+        commit('setToken', data.token);
+        $cookies.set('token', data.token);
+        if (data.message) {
+          toast("Logged In Successfully", {
+            "theme": "dark",
+            "type": "default",
+            "position": "top-center",
+            "dangerouslyHTMLString": true
+          });
+        }
+      } catch (error) {
+        console.error('Error logging in:', error);
+        toast("Error logging in. Please try again.", {
+          "theme": "auto",
+          "type": "error",
           "position": "top-center",
           "dangerouslyHTMLString": true
         });

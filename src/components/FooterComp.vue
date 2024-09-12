@@ -61,13 +61,19 @@ export default {
     grid-template-rows: 1fr auto;
 
 } */
+ body {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-height: 100vh;
+ }
 .site-footer {
   background-color: #26272b;
   padding: 20px 0;
   font-size: 14px;
   line-height: 20px;
   color: #737373;
-  /* grid-row: 2; */
+  grid-row: 2;
+  flex-shrink: 0; 
 }
 
 .site-footer hr {

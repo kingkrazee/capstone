@@ -3,7 +3,6 @@
       <table class="checkout-table">
         <thead>
           <tr>
-            {{ allEquipment }}
             <th>Image</th>
             <th>Product Name</th>
             <th>Category</th>
@@ -16,11 +15,13 @@
         <tbody>
           <tr v-for="equipment in $store.state.allEquipment" :key="equipment.equipmentID">
             <td>
-              <img alt="product image" class="product-img" />
+              <img :src="equipment.equipURL" alt="item Image" class="img-fluid" width="auto" height="auto" />
             </td>
             <td>{{ equipment.equipName }}</td>
             <td>{{ equipment.category }}</td>
             <td>R{{ equipment.amount }}</td>
+            <td></td>
+            <td></td>
             <td>
               <button @click="removeItem(index)" class="btn btn-danger">Remove</button>
             </td>
@@ -44,6 +45,17 @@
     //     }, 0);
     //   }
     // },
+    data() {
+      return {
+        newEquip: {
+          equipName: '',
+          quantity: '',
+          amount: '',
+          category: '',
+          equipURL: '',
+        },
+      }
+    },
     computed:{
         allEquipment(){
             console.log('booked equipment:',this.$store.state.bookedEquipment)
@@ -108,9 +120,13 @@
   }
   
   .btn-success {
-    background-color: #28a745;
+    background-color: #000000;
     color: white;
     border: none;
+  }
+  .img-fluid {
+    max-width: 100px;
+    height: auto;
   }
   </style>
   

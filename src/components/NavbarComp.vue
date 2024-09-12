@@ -193,7 +193,13 @@ export default {
       activeTab: "signup",
       showPassword: false,
       showRepeatPassword: false,
-      showLoginPassword: false
+      showLoginPassword: false,
+      newUser:{
+        firstName: '',
+        lastName: '',
+        emailAdd: '',
+        usersPass:'',
+      }
     };
   },
   methods: {
@@ -210,10 +216,20 @@ export default {
       this.showLoginPassword = !this.showLoginPassword;
     },
     insertUsers() {
-        this.$store.dispatch('insertUsers', this.newUser);
+      const newUser = {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        emailAdd: this.emailAdd,
+        usersPass: this.usersPass
+       }
+        this.$store.dispatch('insertUsers', newUser);
       },
       loginUser() {
-        this.$store.dispatch('loginUser',{ emailAdd: this.emailAdd, usersPass: this.usersPass });
+        const user = {
+          email: this.emailAdd,
+          usersPass: this.usersPass
+        }
+        this.$store.dispatch('loginUser',this.$data);
         this.$router.push('/');
       }
   }
