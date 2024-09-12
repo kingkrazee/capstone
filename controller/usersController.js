@@ -38,7 +38,7 @@ const updateUser = async(req,res) =>{
     res.status(200).send('User updated successfully')
 }
 const loginUser = async(req,res)=>{
-    res.status(200).send({message:"You have logged in successfully"})
+    res.status(200).send({message:"You have logged in successfully",token:req.body.token})
 }
 const insertBooking = async (req,res) =>{
     const { usersID } = req.params;
