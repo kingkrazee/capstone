@@ -1,5 +1,5 @@
 import express from 'express'
-import { getUsers, getUser, insertUsers, deleteUser, updateUser, loginUser } from '../controller/usersController.js'
+import { getUsers, getUser, insertUsers, deleteUser, updateUser, loginUser, logoutUser } from '../controller/usersController.js'
 import { checkUser, verifyToken } from '../middleware/authenticate.js'
 import { insertBookingDb, getAllBookingDb, getAllBookingsDb, getBookingDb, updateBookingDb, deleteAllBookingDb, deleteBookingDb, deleteUserBookingsDb } from '../model/usersDb.js'
 
@@ -10,6 +10,8 @@ router.
         .post(insertUsers)
 
 router.post('/login',checkUser, loginUser)
+
+router.post('/logout', logoutUser)
 
 // router.
 //     route('/booking')

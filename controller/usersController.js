@@ -40,6 +40,16 @@ const updateUser = async(req,res) =>{
 const loginUser = async(req,res)=>{
     res.status(200).send({message:"You have logged in successfully",token:req.body.token})
 }
+const logoutUser = async (req, res) => {
+    try {
+      req.token = null;
+      res.json({ message: 'You logged out successfully' });
+    } catch (error) {
+      console.error('Error logging out:', error);
+      res.status(500).json({ message: 'Error logging out' });
+    }
+}
+
 const insertBooking = async (req,res) =>{
     const { usersID } = req.params;
     const {equipmentID} = req.params;
@@ -61,4 +71,4 @@ const insertBooking = async (req,res) =>{
         return res.status(500).json({message: errorMessage})
     }
 }
-export { getUsers, getUser, insertUsers, deleteUser, updateUser, loginUser, insertBooking }
+export { getUsers, getUser, insertUsers, deleteUser, updateUser, loginUser, logoutUser, insertBooking }
