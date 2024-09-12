@@ -12,12 +12,12 @@ const getUserEmailDb = async (email)=>{
     let [[data]] = await pool.query(`SELECT * FROM users WHERE emailAdd = ?`,[email])
     return data
 }
-const insertUsersDb = async(firstName,lastName,usersAge,gender,usersRole,emailAdd,usersPass,usersProfile)=>{
+const insertUsersDb = async(firstName,lastName,usersAge,gender,emailAdd,usersPass,usersProfile)=>{
     await pool.query(`
         INSERT INTO users
-        (firstName,lastName,usersAge,gender,usersRole,emailAdd,usersPass,usersProfile)
-        VALUES (?,?,?,?,?,?,?,?)`,
-    [firstName,lastName,usersAge,gender,usersRole,emailAdd,usersPass,usersProfile])
+        (firstName,lastName,usersAge,gender,emailAdd,usersPass,usersProfile)
+        VALUES (?,?,?,?,?,?,?)`,
+    [firstName,lastName,usersAge,gender,emailAdd,usersPass,usersProfile])
 }
 const deleteUserDb = async(usersID)=>{
     await pool.query(`DELETE FROM users WHERE usersID = ?`,[usersID])
