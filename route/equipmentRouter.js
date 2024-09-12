@@ -1,5 +1,6 @@
 import express from 'express'
 import { getAllEquipment, getEquipment,insertEquipment, deleteEquipment, updateEquipment } from '../controller/equipmentController.js'
+import { checkUser } from '../middleware/authenticate.js'
 
 const router = express.Router()
 
@@ -10,7 +11,7 @@ router.
 
 router.
     route('/:id')
-        .get(getEquipment)
+        .get(checkUser, getEquipment)
         .delete(deleteEquipment)
         .patch(updateEquipment)
     

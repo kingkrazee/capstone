@@ -1,7 +1,9 @@
 import { getAllEquipmentDb, getEquipmentDb, insertEquipmentDb, deleteEquipmentDb, updateEquipmentDb } from "../model/equipmentDb.js";
 
 const getAllEquipment = async(req,res)=>{
-    res.json(await getAllEquipmentDb())
+    let data = await getAllEquipmentDb()
+    let id = req.body.id
+    res.json({data:data, user_id:id})
 }
 const getEquipment = async(req,res)=>{
     res.json(await getEquipmentDb(req.params.id))

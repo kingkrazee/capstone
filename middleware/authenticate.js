@@ -6,7 +6,10 @@ config()
 
 const checkUser = async(req,res,next)=>{
     const {emailAdd,usersPass} = req.body;
-    let hashedPassword = (await getUserEmailDb(emailAdd)).usersPass
+    let userReturned = await getUserEmailDb(emailAdd)
+    let hashedPassword = userReturned.usersPass
+    let id = hashedPassword.usersID
+    
     // console.log(hashedPassword);
 
     if(!hashedPassword){
@@ -14,7 +17,7 @@ const checkUser = async(req,res,next)=>{
     }
     let result = await compare(usersPass,hashedPassword)
         if(result==true){
-            let token = jwt.sign({emailAdd:emailAdd},process.env.SECRET_KEY,{expiresIn:'1h'}) // usersRole:usersRole, usersID:usersID
+            let token = jwt.sign({id:id, emailAdd:emailAdd},process.env.SECRET_KEY,{expiresIn:'1h'}) // usersRole:usersRole, usersID:usersID
             req.body.token = token
             console.log(token);
             next()
@@ -33,6 +36,7 @@ const verifyToken = (req,res,next)=>{
             return;
         }
         req.body.emailAdd = decoded.emailAdd
+        req.body.id = decoded.id
         console.log(decoded);
     })
     next()
