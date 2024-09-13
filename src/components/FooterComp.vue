@@ -4,7 +4,7 @@
         <div class="row">
           <div class="col-sm-12 col-md-6">
             <h6>The Industry</h6>
-            <p class="text-justify">At PlayHub, we specialize in offering top-tier PS5 gaming equipment, ensuring that every gamer can fully immerse themselves in the next-generation gaming experience. From the latest consoles to cutting-edge accessories, we provide everything you need to take your gaming setup to the next level. What sets PlayHub apart is our commitment to quality, customer satisfaction, and competitive pricing, making us one of the best destinations for all your PlayStation needs. Gear up with PlayHub and experience gaming like never before!</p>
+            <p class="text-justify">M&N Hiring operates in the catering and equipment rental industry, where businesses provide essential services and tools for events such as weddings, parties, and corporate gatherings. In this industry, companies like M&N Hiring supply items like tables, chairs, tents, and catering equipment to clients who need them temporarily. The business works by offering a range of products, usually through an online platform or direct inquiries, allowing customers to book the required items for specific dates. High-quality service, reliable delivery, and flexible pricing are key to standing out in this competitive market.</p>
           </div>
           <div class="col-xs-6 col-md-3">
             <h6>Categories</h6>
