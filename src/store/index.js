@@ -5,8 +5,7 @@ import 'vue3-toastify/dist/index.css';
 import { useCookies } from 'vue3-cookies';
 
 const {cookies} = useCookies()
-const apiURL = 'http://localhost:5004/';
-// const apiURL = 'https://capstone-1-u51y.onrender.com/';
+const apiURL = 'https://capstone-1-u51y.onrender.com/';
 axios.defaults.withCredentials= true
 axios.defaults.headers =cookies.get('token')
 
