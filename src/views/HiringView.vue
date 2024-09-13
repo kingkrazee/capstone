@@ -1,6 +1,6 @@
 <template>
     <div class="hiring">
-        <h1>Hiring</h1>
+        <h1>Hirings</h1>
     </div>
     <div class="controls">
         <input v-model="searchQuery" type="text" placeholder="Search by name..." class="search-input" />
