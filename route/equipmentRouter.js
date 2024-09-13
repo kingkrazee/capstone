@@ -1,17 +1,19 @@
 import express from 'express'
 import { getAllEquipment, getEquipment,insertEquipment, deleteEquipment, updateEquipment } from '../controller/equipmentController.js'
-import { checkUser } from '../middleware/authenticate.js'
+import {  verifyToken } from '../middleware/authenticate.js'
 
 const router = express.Router()
 
 router.
     route('/')
-        .get(getAllEquipment)
+        .get(verifyToken,getAllEquipment)
         .post(insertEquipment)
+
+router.get('/general',getAllEquipment)
 
 router.
     route('/:id')
-        .get(checkUser, getEquipment)
+        .get( getEquipment)
         .delete(deleteEquipment)
         .patch(updateEquipment)
     

@@ -8,9 +8,9 @@ const checkUser = async(req,res,next)=>{
     const {emailAdd,usersPass} = req.body;
     let userReturned = await getUserEmailDb(emailAdd)
     let hashedPassword = userReturned.usersPass
-    let id = hashedPassword.usersID
+    let id = userReturned.usersID
     
-    // console.log(hashedPassword);
+    // console.log(id);
 
     if(!hashedPassword){
         return res.status(404).json({message: "User email or password is incorrect"})
@@ -26,10 +26,11 @@ const checkUser = async(req,res,next)=>{
         }
 }
 const verifyToken = (req,res,next)=>{
+    console.log('im working');
     let {cookie} = req.headers
     //checks if token exists first
     let token = cookie && cookie.split('=')[1]
-    //console.log(token);
+    console.log('token:',token);
     jwt.verify(token,process.env.SECRET_KEY,(err,decoded)=>{
         if(err){
             res.json({message:'Token has expired'})
@@ -37,8 +38,8 @@ const verifyToken = (req,res,next)=>{
         }
         req.body.emailAdd = decoded.emailAdd
         req.body.id = decoded.id
-        console.log(decoded);
+        console.log('token:' ,decoded);
+        next()
     })
-    next()
 }
 export {checkUser, verifyToken}
