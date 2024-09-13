@@ -52,7 +52,7 @@ export default {
         filteredEquipment() {
             const categories = ['Extras'];
             return this.AllEquipment()
-                .filter(equipment => categories.includes(equipment.category) &&
+                ?.filter(equipment => categories.includes(equipment.category) &&
                     equipment.equipName.toLowerCase().includes(this.searchQuery.toLowerCase()));
         }
     },

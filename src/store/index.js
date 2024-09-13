@@ -2,11 +2,13 @@ import { createStore } from 'vuex'
 import axios from 'axios';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
-import { useCookies } from 'vue-cookies';
+import { useCookies } from 'vue3-cookies';
 
-const apiURL = 'https://capstone-1-u51y.onrender.com/';
+const {cookies} = useCookies()
+const apiURL = 'http://localhost:5004/';
+// const apiURL = 'https://capstone-1-u51y.onrender.com/';
 axios.defaults.withCredentials= true
-axios.defaults.headers =$cookies.get('token')
+axios.defaults.headers =cookies.get('token')
 
 export default createStore({
   state: {
@@ -42,14 +44,31 @@ export default createStore({
     }
   },
   actions: {
-    async getAllEquipment({commit}){
+    async getAllEquipment({ commit }) {
       try {
-        const { data } = await axios.get(`${apiURL}equipment`);
-        commit('setAllEquipment', data);
-      }catch (error){
-        console.log('error fetching equipment:',error);
+        let response;
+    
+        // Check if the cookie exists and is valid
+        if (cookies.get('token')) { // Replace 'yourCookieName' with the actual cookie name
+          // Fetch data for authenticated users
+          response = await axios.get(`${apiURL}equipment`);
+        } else if(!cookies.get('token')){
+          // Fetch general data if no valid cookie is found
+          response = await axios.get(`${apiURL}equipment/general`);
+        }
+    
+        const data = response.data;
+        console.log(data);
+    
+        // Commit the data to the Vuex store
+        commit('setAllEquipment', data.data);
+        commit('setUsersID', data.user_id);
+    
+      } catch (error) {
+        console.log('Error fetching equipment:', error.message);
       }
     },
+    
     async getEquipment({ commit }, id) {
       try {
         const { data } = await axios.get(`${apiURL}equipment/${id}`);
@@ -200,15 +219,16 @@ export default createStore({
     },
     //bookings
     async insertBookingDb({ commit, state}, payload){
-      const {equipmentID,bookingDate,usersID} = payload;
+      console.log(state.usersID)
+      const {equipmentID,bookingDate} = payload;
+      console.log(payload)
       console.log(`insertBookingDb bookingDate:`, bookingDate);
       try{
-        const token = state.token;
         const usersID = state.usersID || cookies.get('usersID');
         console.log('Inserting booking with:',{ equipmentID, usersID, bookingDate});
-        const response = await axios.post(`https://capstone-1-u51y.onrender.com/users/${usersID}/booking`,{
+        const response = await axios.post(`${apiURL}users/${usersID}/booking`,{
           equipmentID: equipmentID,
-          date: bookingDate,
+          bookingDate: bookingDate,
         });
         if (response.data.message) {
           toast("Order saved successfully!", {
@@ -221,7 +241,7 @@ export default createStore({
         }
       } catch (error) {
         console.error(error);
-        toast("Error saving order. Please try again.", {
+        toast("Login to hire.", {
           "theme": "auto",
           "type": "error",
           "position": "top-center",

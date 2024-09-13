@@ -128,5 +128,20 @@
     max-width: 100px;
     height: auto;
   }
+  @media only screen and (max-width: 780px) {
+  .checkout-table {
+    font-size: 0.8rem;
+  }
+  .checkout-table th, .checkout-table td {
+    padding: 0.5rem;
+  }
+  .product-img {
+    max-width: 50px;
+    height: auto;
+  }
+  .checkout-container {
+    margin: 1rem;
+  }
+}
   </style>
   

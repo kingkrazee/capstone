@@ -223,7 +223,7 @@ export default {
         usersPass: this.usersPass
        }
         this.$store.dispatch('insertUsers', newUser);
-      },
+    },
       loginUser() {
         const user = {
           email: this.emailAdd,

@@ -50,7 +50,7 @@
           filteredEquipment() {
               const categories = ['Crockery', 'Cutlery', 'Serving Dishes', 'Kitchenware', 'Glasses'];
               return this.AllEquipment()
-                  .filter(equipment => categories.includes(equipment.category) &&
+                  ?.filter(equipment => categories.includes(equipment.category) &&
                       equipment.equipName.toLowerCase().includes(this.searchQuery.toLowerCase()));
           },
           sortedFilteredEquipment() {
