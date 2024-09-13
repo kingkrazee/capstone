@@ -19,7 +19,7 @@
           <div class="carousel-caption d-none d-md-block">
             <h5>{{ equipment.equipName }}</h5>
             <p>Amount: R{{ equipment.amount }}</p>
-            <button @click="$router.push(`/Checkout`)" class="purchase-btn">Hire</button>
+            <button data-bs-toggle="modal" data-bs-target="#hireModal" @click="this.selected= equipment.equipmentID" class="purchase-btn">Hire</button>
             <button @click="$router.push(`/equipment/${equipment.equipmentID}`)" class="view-more-btn">View More</button>
           </div>
         </div>
@@ -34,6 +34,24 @@
       </button>
     </div>
   </div>
+  <!-- HIRE MODAL -->
+  <div class="modal" id="hireModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Date</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="date" v-model="date">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
+        <button type="button" class="btn btn-primary" @click="newHire()">Hire</button>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
@@ -62,8 +80,34 @@ export default {
         },
         AllEquipment() {
             return this.$store.state.allEquipment;
+        },
+        book(equipmentID) {
+        const existingEquipment = this.$store.state.bookedEquipment.find(equipment => equipment.equipmentID === equipmentId);
+        if (existingEquipment) {
+            // Increment the quantity of the existing product
+            this.$store.commit('updateBookedEquipmentQuantity', { equipmentID: equipmentID, quantity: existingEquipment.quantity + 1 });
+        } else {
+            // Add the new product to the checkout
+            this.$store.dispatch('getEquipment', equipmentID).then(equipment => {
+                  console.log('Adding product to booked equipment:', equipment);
+                  this.$store.commit('setBookedEquipment', equipment);
+            });
+        }
+        // Check if the user is logged in
+        if (this.$cookies.get('token')) {
+            // Navigate to the checkout page with the productId as a parameter
+            this.$router.push({ name: 'checkout', params: { equipmentID: equipmentID } });
+        } else {
+            // Navigate to the login page
+            this.$router.push({ name: 'login' });
+        }
+        },
+        newHire(){
+            console.log(this.$store.state.userID)
+            this.$store.dispatch('insertBookingDb', {equipmentID:this.selected,bookingDate:this.date})
         }
     },
+    
     mounted() {
         this.getAllEquipment();
     }
@@ -144,6 +188,17 @@ export default {
 .content button{
     pointer-events: auto;
   }
+  .modal-dialog {
+  max-width: 300px; 
+  margin: 40px auto; 
+}
+.modal-content {
+  padding: 20px;
+  background-color: #424242;
+  color: white;
+  font-family: "Baskervville SC", serif;
+  border: rgb(255, 255, 255) solid 1px;
+}
 @media (max-width: 780px) {
   .thecarousel {
     width: 100%;
