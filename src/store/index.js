@@ -188,7 +188,7 @@ export default createStore({
         const { data } = await axios.post(`${apiURL}users/login`, info);
         console.log(data);
         commit('setToken', data.token);
-        $cookies.set('token', data.token);
+        cookies.set('token', data.token);
         if (data.message) {
           toast("Logged In Successfully", {
             "theme": "dark",
