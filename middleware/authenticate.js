@@ -6,9 +6,15 @@ config()
 
 const checkUser = async(req,res,next)=>{
     const {emailAdd,usersPass} = req.body;
-    let userReturned = await getUserEmailDb(emailAdd)
+    let userReturned = await getUserEmailDb(emailADD)
+
+    if(!userReturned){
+        return res.status(404).json({message: "User email or password is incorrect"})
+    }
+
     let hashedPassword = userReturned.usersPass
-    let id = userReturned.usersID
+    let id = userReturned.id
+}
     
     // console.log(id);
 
@@ -24,7 +30,7 @@ const checkUser = async(req,res,next)=>{
         }else{
             res.status(400).send('Password incorrect')
         }
-}
+
 const verifyToken = (req,res,next)=>{
     console.log('im working');
     let {cookie} = req.headers
