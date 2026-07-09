@@ -10,9 +10,9 @@ let PORT = process.env.PORT || 5004
 const app = express()
 app.use(express.json())
 app.use(cors({
-    origin: ['http://localhost:8080','https://m-and-n-hiring.web.app','*'], 
+    origin: ['http://localhost:8080','https://m-and-n-hiring.web.app','http://localhost:8081',], 
     credentials:true,
-    headers: ['Content-type', 'Authorization']
+    allowedHeaders: ['Content-type', 'Authorization']
 }))
 
 app.use(express.static('public'))
